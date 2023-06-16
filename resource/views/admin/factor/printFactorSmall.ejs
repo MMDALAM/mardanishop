@@ -1,0 +1,118 @@
+<div class="p" style="border: 2px blak">
+  <ul class="menu-bar">
+    <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+    <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+  </ul>
+  <ul class="menu-bar">
+    <li>
+      <a
+        onclick="window.print()"
+        style="padding: 0.5rem; font-size: 2rem"
+        class="menu"
+        >چاپ فاکتور</a
+      >
+    </li>
+  </ul>
+  <section class="printss">
+    <header class="head">
+      <div>
+        <p
+          class="head_fac"
+          style="font-size: 1rem !important; color: black; font-weight: 900"
+        >
+          پخش مواد غذایی عبدالرضا مردانی
+        </p>
+      </div>
+      <p class="head_fac">فاکتور فروش</p>
+
+      <div class="can">
+        <div class="item">
+          <p style="width: 8rem !important">
+            صورتحساب : <%= factors.name_clint%>
+          </p>
+          <p>شماره : <%= factors.codeFactor %></p>
+        </div>
+
+        <div class="item">
+          <p>تاریخ : <%= date(factors.createdAt).format('jYYYY/jMM/jD') %></p>
+          <% if(factors.name_clint === 'بدون نام') { %> <% } else { %>
+          <p>تلفن همراه : <%= factors.phone %></p>
+          <% } %>
+        </div>
+      </div>
+    </header>
+
+    <main class="form_line">
+      <section class="container">
+        <table class="main">
+          <tr>
+            <th>#</th>
+            <th>شرح</th>
+            <th>تعداد</th>
+            <th>قیمت فی</th>
+            <th>قیمت کل</th>
+          </tr>
+          <% let number = 1 %> <% lines.forEach(line => { %>
+          <tr>
+            <td class="td"><%= number %></td>
+            <td class="td" style="width: 8rem"><%= line.name_product %></td>
+
+            <td class="td">
+              <% if(line.number_total == 0){ %> <%= line.number_retail %> <% }
+              else if (line.type == "کارتون" || line.type == "کیسه" ||line.type
+              == "بسته"){ %> <%= line.number_total %> <% } else { %> <%=
+              line.cut %> <% } %>
+            </td>
+
+            <td class="td"><%=(line.price_retail).toLocaleString() %></td>
+            <td class="td"><%= (line.priceTotal).toLocaleString() %></td>
+          </tr>
+          <% number++ %> <% }) %>
+        </table>
+        <div class="factor_text" style="font-size: 0.8rem !important">
+          جمع کل : &nbsp;&nbsp;&nbsp;&nbsp;<% if(factors.discount) { %> <%=
+          (factors.priceTotal + factors.discount ).toLocaleString() %> <% } else
+          {%> <%= (factors.priceTotal).toLocaleString() %> <%} %>
+        </div>
+        <div class="factor_text">
+          پرداختی : &nbsp;&nbsp;&nbsp;<% if(factors.discount) { %>
+          <%=(factors.discount).toLocaleString() %> <% } else{ %> 0 <% } %>
+        </div>
+        <div class="factor_text" style="font-size: 0.8rem !important">
+          مبلغ پرداختی : &nbsp;&nbsp;&nbsp;&nbsp; <%=
+          (factors.priceTotal).toLocaleString() %>
+        </div>
+        <% if(factors.name_clint === 'بدون نام') { %> <% } else { %>
+        <div class="factor_text">
+          بدهی قبل از فاکتور : &nbsp;&nbsp;&nbsp;<%=
+          (factors.debtorPrice).toLocaleString() %>
+        </div>
+        <div class="factor_text">
+          بدهی قبل با این فاکتور : &nbsp;&nbsp; <% if(factors.unpaid){ %>
+          <%=(factors.debtorPrice).toLocaleString()%> <% } else
+          if(factors.debtorPrice){ %> <%= (factors.priceTotal +
+          factors.debtorPrice).toLocaleString()%> <% }else{ %>
+          <%=(factors.priceTotal + clints.debtor).toLocaleString()%> <% } %>
+        </div>
+        <% } %>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p
+          class="text_footer"
+          style="
+            color: black;
+            font-weight: 900 !important;
+            font-size: 0.7rem !important;
+          "
+        >
+          اجناس فاکتور شماره <%= factors.codeFactor %> صحیح و سالم تحویل داده شد
+        </p>
+      </div>
+      <p class="text_footer">اندیمشک خیابان اسحاق روشنی نبش کوچه نوین</p>
+      <p class="text_footer">09166413877 - 42640914 : تلفن</p>
+    </footer>
+  </section>
+</div>

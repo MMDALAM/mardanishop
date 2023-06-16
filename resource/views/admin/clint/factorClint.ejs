@@ -1,0 +1,79 @@
+<section class="box2">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/clint" class="menu">صفحه مشتری</a></li>
+      <li><a href="/admin/clints" class="menu">انتخاب مشتری</a></li>
+      <% if(name_clint.name === 'بدون نام') { %> <% } else { %>
+      <li>
+        <a href="/admin/debtorClint/<%= name_clint.id %>" class="menu">
+          پرداخت ها
+        </a>
+      </li>
+      <li>
+        <a href="/admin/editeClint/<%= name_clint.id %>" class="menu"
+          >ویرایش مشتری</a
+        >
+      </li>
+      <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+      <% } %>
+    </ul>
+  </header>
+
+  <main>
+    <%- include(viewPath('layouts/error-messages')) -%>
+
+    <select
+      style="width: 25rem; box-shadow: 1px 2px 3px black"
+      name="forma"
+      onchange="location = this.value;"
+    >
+      <option selected disabled>فاکتور مورد نظر خود را انتخاب کنید</option>
+      <% factors.forEach(factor => { %>
+      <option value="/admin/singelFactor/<%= factor.id %>">
+        <%= date(factor.createdAt).format('jYYYY/jMM/jD') %> , <%=
+        date(factor.createdAt).fromNow() %>
+      </option>
+      <% }) %>
+    </select>
+  </main>
+
+  <% if(name_clint.name === 'بدون نام') { %> <% } else { %>
+  <h4
+    style="
+      background-color: black;
+      margin-top: 3rem;
+      border-radius: 1rem;
+      padding: 0.5rem;
+    "
+  >
+    بدهی اقای <%= name_clint.name %> به شما <%=
+    name_clint.debtor.toLocaleString() %> میباشد
+  </h4>
+  <% } %>
+
+  <footer class="footer"></footer>
+
+  <button id="normal" class="btn_danger" style="margin-top: 2rem">
+    حذف مشتری
+  </button>
+</section>
+
+<script>
+  document.getElementById("normal").addEventListener("click", function () {
+    Swal.fire({
+      title: " پاک کردن مشتری ",
+      text: "آیا مطمعن هستید که مشتری پاک شود؟",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "brown",
+      cancelButtonText: "انصراف",
+      showConfirmButton: true,
+      confirmButtonText: "بله,پاک شود",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/admin/deleteClint/<%= name_clint.id %>";
+      }
+    });
+  });
+</script>

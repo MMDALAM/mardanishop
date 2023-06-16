@@ -1,0 +1,37 @@
+<section class="box">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li>
+        <a href="/admin/PurchaseInvoice" class="menu">انتخاب فاکتور خرید</a>
+      </li>
+      <li><a href="/admin/PurchaseInvoice" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="form_aut">
+    <section class="body_plan">
+      <div class="main_body">
+        <main class="form_auth">
+          <form
+            action="/admin/showPurchaseInvoicePart"
+            method="post"
+            novalidate
+          >
+            <h5>لطفا نام بخش مورد نظر خود را وارد کنید</h5>
+            <%- include(viewPath('layouts/error-messages')) -%>
+            <input list="brow" name="pIPart" placeholder="جستجو پخش" required />
+            <datalist id="brow">
+              <% PInvos.forEach(PInvo => { %>
+              <option value="<%= PInvo %>"><% }) %></option>
+            </datalist>
+
+            <button type="submit" class="res btn">ادامه</button>
+          </form>
+        </main>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

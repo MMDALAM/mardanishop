@@ -1,0 +1,54 @@
+
+<section class="box">
+    <header class="head">
+        <ul class="menu-bar">
+            <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+            <li><a href="/admin/clints" class="menu">انتخاب مشتری</a></li>
+            <li><a onclick="window.history.go(-1)" class="menu" >بازگشت</a></li>
+        </ul>
+    </header>
+
+<main class="form_aut">
+    <section class="body_plan">
+        <% debtors.forEach(debtor => { %>
+            <div class="main_body">
+            <main class="main_form_plan">
+                <h6 style="color: black;"> بدهکاری / <%= date(debtor.createdAt).fromNow() %></65>
+                    <h5 class="head_plan"> 
+                        <%= date(debtor.createdAt).format('jYYYY/jMM/jD') %>  
+                        <%= debtor.type %></h5>
+                        
+                    <main class="back_form">
+                        <p style="text-align: center; padding: 5px; ">
+                            <%= debtor.name_clint %>
+                            <hr />
+                            مبلغ پرداختی : <%= (debtor.amount_debtor).toLocaleString() %>
+                            <hr />
+                            شناسه پرداخت : <%= debtor.receipt_payment %>
+                        </p>
+                        <% if(debtor.description){ %>
+                        <h5 style="text-align: center; padding: 5px; ">
+                            <hr />
+                            شرح پرداخت : <%= debtor.description %>
+                        </h5> 
+                        <% } %>
+                        <hr />
+                        <a href="/admin/paymentReceipt/<%= debtor.id %>">چاپ رسید</a>
+                    </main>
+            </main>
+            </div>
+            <% }) %>
+        </section>
+</main>
+
+
+
+<footer class="footer"></footer>
+    <h4 style="background-color: black; margin-top: 2rem; border-radius: 1rem; padding: .5rem;">
+بدهی اقای <%= name_clint.name %> به شما <%= (name_clint.debtor).toLocaleString() %> میباشد</h4>
+    <%if(creditors.length > 0){ %>  
+    <a href="/admin/creditorClint/<%= name_clint.id %>" class="link" style="font-size: 1.2rem;">پرداخت های بستانکاری</a>
+    <% } %>
+    <a href="/admin/paymentDebtorClint/<%= name_clint.id %>" class="link">پرداخت بدهی</a>
+</section>
+

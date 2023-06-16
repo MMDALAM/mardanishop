@@ -1,0 +1,29 @@
+<section class="main_auth">
+  <div class="cover">
+    <header class="head">
+      <h2 style="color: black">پخش مواد غذایی عبدالرضا مردانی</h2>
+    </header>
+
+    <main class="f_auth">
+      <p style="font-weight: 900">ورود به برنامه</p>
+      <form action="/auth" method="post">
+        <%- include(viewPath('layouts/error-messages')) -%>
+        <input type="text" id="auth" name="username" placeholder="نام کاربری" />
+        <input
+          type="password"
+          id="auth"
+          name="password"
+          placeholder="رمز عبور"
+        />
+
+        <button type="submit" class="res btn">ورود</button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <h5 style="color: black; font-weight: 700">
+        ساخته شده توسط محمد عالم زاده
+      </h5>
+    </footer>
+  </div>
+</section>

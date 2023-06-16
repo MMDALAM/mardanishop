@@ -1,0 +1,24 @@
+<section class="auth">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/products" class="menu">صفحه محصول</a></li>
+    </ul>
+  </header>
+
+  <main class="form_auth">
+    <form action="/admin/singelProducts/" method="post" novalidate>
+      <h5 style="color: white">لطفا نام محصول مورد نظر خود را وارد کنید</h5>
+      <%- include(viewPath('layouts/error-messages')) -%>
+      <input list="brow" name="name" placeholder="جستجو محصول" required />
+      <datalist id="brow">
+        <% products.forEach(product => { %>
+        <option value="<%= product.name %>"><% }) %></option>
+      </datalist>
+
+      <button type="submit" class="res btn">جستجو</button>
+    </form>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

@@ -1,0 +1,70 @@
+<section class="send_data">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/products" class="menu">صفحه محصولات</a></li>
+    </ul>
+  </header>
+
+  <main class="form_auth">
+    <form action="/admin/creatProducts" method="post" novalidate>
+      <h3>ایجاد محصول جدید</h3>
+
+      <%- include(viewPath('layouts/error-messages')) -%>
+
+      <input type="text" name="name" placeholder="نام محصول را وارد کنید" />
+
+      <select style="font-size: 1rem" name="type">
+        <option disabled selected>نوع بسته بندی را وارد کنید</option>
+        <option value="بسته">بسته</option>
+        <option value="کارتن">کارتن</option>
+        <option value="کیسه">کیسه</option>
+        <option value="کیلوگرم">کیلوگرم</option>
+        <option value="عدد">عدد</option>
+      </select>
+
+      <input
+        type="number"
+        name="price_retail"
+        placeholder="قیمت جز محصول را وارد کنید"
+        min="0"
+        required
+      />
+      <input
+        type="number"
+        name="price_total"
+        placeholder="قیمت بسته محصول را وارد کنید"
+        min="0"
+        required
+      />
+
+      <input
+        type="number"
+        name="amountOfPackages"
+        placeholder="تعداد بسته ها را وارد کنید"
+        min="0"
+        required
+      />
+
+      <input
+        type="number"
+        name="numberPerPackage"
+        placeholder="تعداد در هر بسته را وارد کنید"
+        min="1"
+        required
+      />
+
+      <input
+        type="number"
+        name="amount"
+        placeholder="تعداد جز را وارد کنید"
+        min="0"
+        required
+      />
+
+      <button type="submit" class="res btn">ثبت</button>
+    </form>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

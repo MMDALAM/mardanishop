@@ -1,0 +1,95 @@
+
+<div class="p">
+    <ul class="menu-bar">
+        <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+        <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+      </ul>
+      <ul class="menu-bar">
+        <li><a onclick="window.print()" style="padding: .5rem; font-size: 2rem;" class="menu">چاپ فاکتور</a></li>
+      </ul>
+<section class="printB">
+
+    <header class="head">
+       <p class="head_B">پخش مواد غذایی عبدالرضا مردانی</p>
+       <p class="head_B">فاکتور فروش</p>
+       
+    <div class="can">
+
+       <div class="itemB">
+       <p>صورتحساب : <%= factors.name_clint%></p>
+       <p>تلفن همراه : <%= factors.phone%></p>
+       <p>آدرس : <%= factors.addresses%></p>
+       </div>
+
+       <div class="itemB">
+       <p>تاریخ : <%= date(factors.createdAt).format('jYYYY/jMM/jD') %></p>
+       <p>شماره : <%= factors.codeFactor %></p>
+       </div>
+    
+    </div>
+    </header>
+
+<main class="form_line">
+
+    <section class="container">
+
+
+    <table class="main table_B">
+    
+    <tr>
+        <th class="big">#</th>
+        <th class="big">شرح</th>
+        <th class="big">مقدار</th>
+        <th class="big">واحد</th>
+        <th class="big">نوع</th>
+        <th class="big">قیمت فی</th>
+        <th class="big">قیمت واحد</th>
+        <th class="big">کل قیمت</th>
+    </tr>
+    <% let number = 1 %>
+    <% lines.forEach(line => { %>
+    <tr>
+        <td class="color bigs"><%= number %></td>
+        <td class="bigs B"><%= line.name_product %></td>
+        <td class="Largee"><%= line.number_retail %></td>
+        <td class="Largee"><%= line.number_total %></td>
+        <td class="bigs"><%= line.type %></td>
+        <td class="bigs Bi"><%= (line.price_retail).toLocaleString() %></td>
+        <td class="bigs Bi"><%= (line.price_total).toLocaleString() %></td>
+        <td class="bigs Bi"><%= (line.priceTotal).toLocaleString() %></td>
+    </tr>
+    <% number++ %>
+    <% }) %>
+        </table>
+
+        <div class="factor_txt" style="font-size: 1.1rem !important">قیمت کل فاکتور : <%=(factors.priceTotal).toLocaleString() %></div>
+        <div class="factor_txt"> پرداختی : <% if(factors.discount) { %> <%=(factors.discount).toLocaleString() %> <% } else{ %>  0 <% } %></div>
+        <% if(factors.name_clint === 'بدون نام') { %>
+            <% } else { %>
+        <div class="factor_txt">بدهی قبل از فاکتور : <%= (clints.debtor).toLocaleString() %></div>
+        <div class="factor_txt">بدهی قبل با این فاکتور : 
+            <% if(factors.unpaid){ %>
+                <%= (clints.debtor).toLocaleString()%>
+            <% }else{ %>
+                <%= (factors.priceTotal + clints.debtor).toLocaleString()%>
+            <% } %>
+        </div>
+        <% } %>
+
+</section>
+</main>
+
+<footer class="footer"">
+    <p class="text_footerB" style="text-align: right !important; margin-right: 4.9rem;">:توضیحات</p>
+    <p class="text_footerB">اجناس فاکتور شماره <%= factors.codeFactor %> صحیح و سالم تحویل داده شد</p>
+    <p class="text_footerB">اندیمشک خیابان اسحاق روشنی نبش کوچه نوین</p>
+    <p  class="text_footerB" >۰۹۱۶۶۴۱۳۸۷۷ - ۴۲۶۴۰۹۱۴ : تلفن</p>
+</footer>
+
+</section>
+
+</div>
+
+
+
+

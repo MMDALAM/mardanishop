@@ -1,0 +1,39 @@
+<section class="upload">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/PurchaseInvoice" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="form_auth">
+    <%- include(viewPath('layouts/error-messages')) -%>
+    <form
+      action="/admin/proccessFactorInv"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <h5>مشخصات فاکتور خرید را وارد کنید</h5>
+
+      <input
+        type="text"
+        name="nameFactor"
+        placeholder=" نام فاکتور خرید را وارد کنید "
+      />
+
+      <input type="text" name="namePart" placeholder=" نام پخش را وارد کنید " />
+
+      <input
+        type="text"
+        name="nameVisitor"
+        placeholder=" نام ویزیتور را وارد کنید "
+      />
+
+      <input type="file" id="images" class="uploads" name="images" />
+
+      <button type="submit" class="res btn">ثبت</button>
+    </form>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

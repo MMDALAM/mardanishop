@@ -1,0 +1,50 @@
+<section class="box">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/clints" class="menu">انتخاب مشتری</a></li>
+      <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="form_aut">
+    <section class="body_plan">
+        <% creditors.forEach(creditor => { %>
+            <div class="main_body">
+            <main class="main_form_plan">
+                <h6 style="color: black;">بستانکاری/ <%= date(creditor.createdAt).fromNow() %></65>
+                    <h5 class="head_plan"> 
+                        <%= date(creditor.createdAt).format('jYYYY/jMM/jD') %>  
+                        <%= creditor.type %></h5>
+                        
+                    <main class="back_form">
+                        <p style="text-align: center; padding: 5px; ">
+                            <%= creditor.name_clint %>
+                            <hr />
+                            مبلغ پرداختی : <%= (creditor.amount_creditor).toLocaleString() %>
+                            <hr />
+                            شناسه پرداخت : <%= creditor.receipt_payment %>
+                        </p>
+                    </main>
+            </main>
+            </div>
+            <% }) %>
+    </section>
+  </main>
+
+  <footer class="footer"></footer>
+  <h4
+    style="
+      background-color: black;
+      margin-top: 3rem;
+      border-radius: 1rem;
+      padding: 0.5rem;
+    "
+  >
+    بستانکاری شما به اقای <%= name_clint.name %> <%=
+    name_clint.creditor.toLocaleString() %> میباشد
+  </h4>
+  <a href="/admin/paymentCreditorClint/<%= name_clint.id %>" class="link"
+    >پرداخت بستانکاری</a
+  >
+</section>

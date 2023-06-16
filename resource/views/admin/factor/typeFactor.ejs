@@ -1,0 +1,26 @@
+<section class="typeFactor">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/factor" class="menu">صدور فاکتور</a></li>
+      <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="link_main">
+    <h3 style="background-color: white; border-radius: 1rem; padding: 0.5rem">
+      لطفا نوع چاپ را انتخاب کنید
+    </h3>
+    <a href="/admin/printFactorSmall/<%= factors.id %>" class="link">
+      فاکتور فیشی
+    </a>
+    <a href="/admin/printFactorLarge/<%= factors.id %>" class="link">
+      A5 فاکتور
+    </a>
+    <a href="/admin/printFactorBig/<%= factors.id %>" class="link">
+      A4 فاکتور
+    </a>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

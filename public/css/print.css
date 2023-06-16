@@ -1,0 +1,17 @@
+.link_print {
+  display: none;
+}
+.back {
+  display: none;
+}
+.menu {
+  display: none;
+}
+.menu-bar {
+  display: none;
+}
+@page {
+  size: auto;
+  margin: 3px;
+  border: solid 1px #000;
+}

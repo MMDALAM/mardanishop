@@ -1,0 +1,51 @@
+<section class="auth">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/allProducts" class="menu">محصولات</a></li>
+    </ul>
+  </header>
+  <main class="main_products">
+    <% let num = Math.floor(products.amount / products.numberPerPackage) %>
+
+    <h4>نام محصول : <%= products.name %></h4>
+    <hr />
+    <h4>نوع بسته بندی : <%= products.type %></h4>
+    <hr />
+    <h4>تعداد کل موجودی : <%= products.amount %></h4>
+    <hr />
+    <h4>
+      تعداد جز موجود : <%= Math.floor(products.amount -
+      (products.numberPerPackage * num)) %>
+    </h4>
+    <hr />
+    <h4>
+      تعداد بسته موجود : <%= Math.floor(products.amount /
+      products.numberPerPackage) %>
+    </h4>
+    <hr />
+    <h4>تعداد موجود در هر بسته : <%= products.numberPerPackage %></h4>
+    <hr />
+    <h4>قیمت جز محصول : <%= (products.price_retail).toLocaleString() %></h4>
+    <hr />
+    <h4>قیمت بسته ای محصول : <%= (products.price_total).toLocaleString() %></h4>
+    <hr />
+  </main>
+
+  <footer class="footer">
+    <form
+      method="post"
+      action="/admin/singelProducts/delete/<%= products.id %>"
+      novalidate
+    >
+      <a
+        href="/admin/singelProducts/edite/<%= products.id %>"
+        class="btn btn-primary"
+        disabled
+      >
+        ویرایش
+      </a>
+      <button type="submit" class="btn_danger">حذف محصول</button>
+    </form>
+  </footer>
+</section>

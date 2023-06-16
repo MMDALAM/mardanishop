@@ -1,0 +1,37 @@
+<section class="box">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li>
+        <a href="/admin/PurchaseInvoice" class="menu">انتخاب فاکتور خرید</a>
+      </li>
+      <li><a href="/admin/showPurchaseInvoice" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="form_aut">
+    <section class="body_plan">
+      <div class="main_body">
+        <main class="form_auth">
+          <select
+            style="width: 30rem; box-shadow: 1px 2px 3px black"
+            name="forma"
+            onchange="location = this.value;"
+          >
+            <option disabled selected>
+              فاکتور خرید مورد نظر خود را انتخاب کنید
+            </option>
+            <% purchaseInvoices.forEach(purchase => { %>
+            <option value="/admin/showPurchaseInvoice/<%= purchase.id %>">
+              <%= purchase.nameFactor %> , <%= purchase.namePart %> , <%=
+              date(purchase.createdAt).format('jYYYY/jMM/jD') %>
+            </option>
+            <% }) %>
+          </select>
+        </main>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

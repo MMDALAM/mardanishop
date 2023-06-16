@@ -1,0 +1,243 @@
+<section class="creatFactor">
+  <header class="head">
+
+    <% if(mainFactor.line === undefined){ %>
+    <a href="/admin/deleteFactor/<%= mainFactor.id %>" class="link"
+      >حذف و صدور فاکتور جدید</a
+    >
+    <% } else { %>
+    <a href="/admin" class="link">صفحه اصلی</a>
+    <% } %>
+    <button type="submit" id="reload" class="btn">بارگذاری مجدد</button>
+  </header>
+
+  <%- include(viewPath('layouts/error-messages')) -%>
+
+  <main class="form_factor">
+    <form
+      action="/admin/line/<%= mainFactor.id %>"
+      class="form"
+      method="post"
+      novalidate
+    >
+      <div class="text_form">اضافه کردن محصولات</div>
+
+      <input
+        list="brow"
+        name="name_product"
+        class="datalist"
+        placeholder=" محصولات را وارد کنید "
+        required
+      />
+      <datalist id="brow">
+        <% products.forEach(product => { %>
+        <option value="<%= product %>"><% }) %></option>
+      </datalist>
+
+      <input
+        type="number"
+        class="input_line"
+        name="number_retail"
+        min="0"
+        placeholder="تعداد جز را وارد کنید"
+      />
+
+      <input
+        type="number"
+        class="input_line"
+        name="number_total"
+        placeholder="تعداد بسته را وارد کنید"
+        min="0"
+        required
+      />
+
+      <button type="submit" class="res btn">اضافه کردن</button>
+    </form>
+  </main>
+
+  <section class="container">
+    <table class="main">
+      <tr class="tr">
+        <th class="singel">#</th>
+        <th class="singel">محصولات</th>
+        <th class="singel">تعداد جز</th>
+        <th class="singel">تعداد بسته</th>
+        <th class="singel">نوع مقدار</th>
+        <th class="singel">قیمت فی</th>
+        <th class="singel">قیمت بسته ای</th>
+        <th class="singel">قیمت کل</th>
+        <th class="singel">تغییر دادن</th>
+        <% if(mainFactor.line === undefined){ %>
+        <th class="singel">حذف کردن</th>
+        <% } %>
+      </tr>
+      <% let number = 1 %> <% lines.forEach(line => { %>
+      <tr>
+        <td class="singel"><%= number %></td>
+        <td class="singel"><%= line.name_product %></td>
+        <td class="singel"><%= line.number_retail %></td>
+        <td class="singel"><%= line.number_total %></td>
+        <td class="singel"><%= line.type %></td>
+
+        <form
+          class="form"
+          method="post"
+          action="/admin/lineChange/<%= line.id %>"
+        >
+          <td class="singel">
+            <input
+              class="input_prin"
+              name="price_retail"
+              type="number"
+              placeholder="<%= (line.price_retail).toLocaleString() %>"
+            />
+          </td>
+
+          <td class="singel">
+            <input
+              class="input_prin"
+              name="price_total"
+              type="number"
+              placeholder="<%= (line.price_total).toLocaleString() %>"
+            />
+          </td>
+
+          <td class="singel"><%= (line.priceTotal).toLocaleString() %></td>
+
+          <td class="singel">
+            <button type="submit" class="btn_success">تغییر</button>
+          </td>
+        </form>
+
+        <% if(mainFactor.line === undefined){ %>
+        <td class="singel">
+          <form
+            method="post"
+            action="/admin/line/delete/<%= line.id %>?_method=DELETE"
+            novalidate
+          >
+            <button type="submit" class="btn_dan">حذف</button>
+          </form>
+        </td>
+        <% } %>
+      </tr>
+      <% number++ %> <% }) %>
+    </table>
+
+    <h1>قیمت تمام شده فاکتور : <%= (priceTotal).toLocaleString() %>
+    </h1>
+    <form action="/admin/discount/<%= mainFactor.id %>" method="post" style="display: flex; flex-direction: row !important;">
+      <input
+      type="number"
+      class="input_line"
+      style="background-color: #88d9ff90;font-size: 0.9rem !important; width: 15rem !important; margin: 0px !important;border-bottom-left-radius: 0px; border-top-left-radius: 0px;"
+      name="discount"
+      min="0"
+      placeholder=" پرداختی را وارد کنید "
+    />
+    <button type="submit" class="btn_dan" style="margin: 0px !important; background-color: rgb(94, 28, 0); font-size: 1rem; font-weight: 800;
+    border-bottom-right-radius: 0px; border-top-right-radius: 0px; height: 3.7rem;">اعمال</button>
+  </form>
+  </section>
+
+  <main class="main_factor">
+    <form
+      action="/admin/createFactor/<%= mainFactor.id %>"
+      class="form_save"
+      method="post"
+    >
+      <div class="text_form">ذخیره فاکتور</div>
+
+      <input
+        name="name_clint"
+        value="<%= mainFactor.name_clint %>"
+        placeholder="<%= mainFactor.name_clint %>"
+        disabled
+        hidden
+      />
+
+      <h1><%= mainFactor.name_clint %></h1>
+      <% if(mainFactor.name_clint === 'بدون نام') { %> <% } else { %>
+
+      <h1><%= mainFactor.phone %></h1>
+      <input
+        name="phone"
+        value="<%= mainFactor.phone %>"
+        placeholder="<%= mainFactor.phone %>"
+        disabled
+        hidden
+      />
+      <% } %> <% if(mainFactor.name_clint === 'بدون نام') { %> 
+        <div class="check">
+          <input
+            type="checkbox"
+            id="unpaid"
+            name="unpaid"
+            hidden
+          />
+        <% } else { %>
+      <div class="check">
+        <input
+          type="checkbox"
+          id="unpaid"
+          name="unpaid"
+          onClick="onClick()"
+          checked
+        />
+        <label
+          class="btn"
+          id="message"
+          style="
+            background: linear-gradient(to right, #108dc7, #ef8e38) !important;
+            padding: 0.3rem;
+            border-radius: 5px;
+            box-shadow: none;
+            color: black;
+          "
+          for="unpaid"
+          >فاکتور پرداخت نشده</label
+        >
+      </div>
+      <% } %>
+
+      <button type="submit" class="res btn" id="sand">ثبت و چاپ فاکتور</button>
+      <% if(mainFactor.line === undefined){ %>
+      <a
+        type="submit"
+        href="/admin/deleteFactor/<%= mainFactor.id %>"
+        class="res btn_danger"
+        >خروج</a
+      >
+      <% } else { %>
+      <a type="submit" href="/admin" class="res btn_danger">خروج</a>
+      <% } %>
+    </form>
+  </main>
+</section>
+
+
+<script>
+  document.getElementById('reload').addEventListener('click' , ()=>{
+    window.location.reload();
+  })
+</script>
+
+<script>
+  var clicks = 0;
+  function onClick() {
+    clicks += 1;
+    var message = "";
+    if (clicks == 1) {
+      message = "فاکتور پرداخت شده";
+    } else if (clicks == 2) {
+      message = "فاکتور پرداخت نشده";
+    } else if (clicks == 3) {
+      message = "فاکتور پرداخت شده";
+    } else if (clicks == 4) {
+      message = "فاکتور پرداخت نشده";
+    } else {
+      message = "لطفا در زدن این دکمه دقت کنید";
+    }
+    document.getElementById("message").innerHTML = message;
+  }
+</script>

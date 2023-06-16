@@ -1,0 +1,52 @@
+<section class="auth">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+    </ul>
+  </header>
+
+  <form action="/admin/factor" method="post">
+    <%- include(viewPath('layouts/error-messages')) -%>
+
+    <input name="name_clint" value="<%= clint.name %>" hidden />
+
+    <button
+      type="submit"
+      class="btn"
+      style="
+        width: 18rem;
+        height: 4.5rem;
+        font-size: 1.8rem;
+        font-weight: 900;
+        font-family: myfont;
+        padding: 0.5rem;
+      "
+    >
+      فاکتور مشتری بدون نام
+    </button>
+  </form>
+
+  <main class="form_auth">
+    <h4 style="padding: 0.5rem">لطفا نام مشتری مورد نظر خود را وارد کنید</h4>
+
+    <form action="/admin/factor" method="post">
+      <%- include(viewPath('layouts/error-messages')) -%>
+
+      <input
+        list="brow"
+        class="datalist"
+        name="name_clint"
+        placeholder=" نام مشتری را وارد کنید "
+        required
+      />
+      <datalist id="brow">
+        <% clints.forEach(clint => { %>
+        <option value="<%= clint %>"></option>
+        <% }) %>
+      </datalist>
+
+      <button type="submit" class="res btn">ثبت</button>
+    </form>
+  </main>
+  <footer class="footer"></footer>
+</section>

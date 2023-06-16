@@ -1,0 +1,78 @@
+<section class="auth">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/clints" class="menu">انتخاب مشتری</a></li>
+      <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="main_factors">
+    <section class="container">
+      <h5><%= factors.name_clint %></h5>
+      <h5><%= date(factors.createdAt).format('jYYYY jMMMM jD') %></h5>
+
+      <table class="main">
+        <tr>
+          <th class="singel">محصولات</th>
+          <th class="singel">تعداد جز</th>
+          <th class="singel">تعداد بسته</th>
+          <th class="singel">قیمت جز</th>
+          <th class="singel">قیمت بسته ای</th>
+          <th class="singel">قیمت کل</th>
+        </tr>
+        <% lines.forEach(line => { %>
+        <tr>
+          <td class="Large singel"><%= line.name_product %></td>
+          <td class="Large singel">
+            <%= (line.number_retail).toLocaleString() %>
+          </td>
+          <td class="Large singel">
+            <%= (line.number_total).toLocaleString() %>
+          </td>
+          <td class="Large singel">
+            <%= (line.price_retail).toLocaleString() %>
+          </td>
+          <td class="Large singel">
+            <%= (line.price_total).toLocaleString() %>
+          </td>
+          <td class="Large singel">
+            <%= (line.priceTotal).toLocaleString() %>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+
+      <h5>
+        قیمت تمام شده فاکتور : <%= (factors.priceTotal).toLocaleString() %>
+      </h5>
+      <% if(factors.debtor){ %>
+      <h3 style="color: white">فاکتور بدهکار</h3>
+      <% } %>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="/admin/typeFactor/<%= factors.id %>" class="res btn">چاپ فاکتور</a>
+  </footer>
+  <a id="normal" class="btn_danger">حذف فاکتور</a>
+</section>
+
+<script>
+  document.getElementById("normal").addEventListener("click", function () {
+    Swal.fire({
+      title: " پاک کردن مشتری ",
+      text: "آیا مطمعن هستید که مشتری پاک شود؟",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "brown",
+      cancelButtonText: "انصراف",
+      showConfirmButton: true,
+      confirmButtonText: "بله,پاک شود",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/admin/deleteFactors/<%= factors.id %>";
+      }
+    });
+  });
+</script>

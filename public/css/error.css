@@ -1,0 +1,38 @@
+@font-face {
+    font-family: MyFont;
+    src: url("../fonts/iransansdn.eot");
+    src: url("../fonts/iransansdn.eot?#iefix") format("embedded-opentype"), url("../fonts/iransansdn.woff") format("woff"), url("../fonts/iransansdn.ttf") format("truetype"); }
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #00092C;
+    font-size: 2rem;
+    font-family: MyFont;
+}
+.img{
+    width: 10rem;
+    height: 10rem;
+    background-image: url(../img/456.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    padding: 5px;
+    border: 2px  solid white;
+    border-radius: 5px;
+    color: white;
+    background-color: brown;
+}

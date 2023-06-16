@@ -1,0 +1,80 @@
+<div class="p" style="border: 2px blak">
+  <ul class="menu-bar">
+    <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+    <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+  </ul>
+  <ul class="menu-bar">
+    <li>
+      <a
+        onclick="window.print()"
+        style="padding: 0.5rem; font-size: 2rem"
+        class="menu"
+        >چاپ فاکتور</a
+      >
+    </li>
+  </ul>
+  <section class="printss">
+    <header class="head">
+      <div>
+        <p
+          class="head_fac"
+          style="font-size: 1rem !important; color: black; font-weight: 900"
+        >
+          پخش مواد غذایی عبدالرضا مردانی
+        </p>
+      </div>
+      <p class="head_fac">رسید پرداخت</p>
+
+      <div class="can">
+        <div class="item">
+          <p style="width: 8rem !important">نام مشتری</p>
+          <p style="width: 8rem !important">تاریخ</p>
+          <p>تلفن همراه</p>
+        </div>
+
+        <div class="item">
+          <p><%= clints.name %></p>
+          <p><%= date(clints.createdAt).format('jYYYY/jMM/jD') %></p>
+          <% if(clints.name_clint === 'بدون نام') { %> <% } else { %>
+          <p><%= clints.phone %></p>
+          <% } %>
+        </div>
+      </div>
+    </header>
+
+    <main class="form_line">
+      <section class="container">
+        <div class="factor_text" style="font-size: 0.9rem !important">
+          پرداختی : &nbsp;&nbsp;&nbsp;&nbsp; <%=
+          (debtors.amount_debtor).toLocaleString() %>
+        </div>
+        <div class="factor_text">
+          مانده حساب : &nbsp;&nbsp;&nbsp;<%=
+          (debtors.debtor_clint).toLocaleString() %> %>
+        </div>
+        <% if(debtors.description){ %>
+        <div class="factor_text">
+          شرح پرداخت : &nbsp;&nbsp;&nbsp;<%= debtors.description %>
+        </div>
+        <% } %>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p
+          class="text_footer"
+          style="
+            color: black;
+            font-weight: 900 !important;
+            font-size: 0.7rem !important;
+          "
+        >
+          رسید پرداخت <%= debtors.receipt_payment %>
+        </p>
+      </div>
+      <p class="text_footer">اندیمشک خیابان اسحاق روشنی نبش کوچه نوین</p>
+      <p class="text_footer">09166413877 - 42640914 : تلفن</p>
+    </footer>
+  </section>
+</div>

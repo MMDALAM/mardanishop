@@ -1,0 +1,48 @@
+<section class="auth">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/clints" class="menu">انتخاب مشتری</a></li>
+      <li><a onclick="window.history.go(-1)" class="menu">بازگشت</a></li>
+    </ul>
+  </header>
+
+  <main class="form_auth">
+    <h4>پرداخت بدهی</h4>
+    <%- include(viewPath('layouts/error-messages')) -%>
+    <form action="/admin/paymentDebtorClint/<%= clints.id %>" method="post">
+      <select name="type">
+        <option disabled>نوع پرداخت را وارد کنید</option>
+        <option value="نقدی">نقدی</option>
+        <option value="چک">چک</option>
+      </select>
+
+      <input
+        type="number"
+        name="amount_debtor"
+        placeholder=" مبلغ قابل پرداخت را وارد کیند "
+        min="0"
+        required
+      />
+
+      <input
+        type="number"
+        name="receipt_payment"
+        placeholder=" شناسه پرداخت را وارد کیند "
+        min="0"
+        required
+      />
+
+      <input
+        type="text"
+        name="description"
+        placeholder=" شرح پرداخت را وارد کیند "
+        max="250"
+      />
+
+      <button type="submit" class="res btn">ثبت</button>
+    </form>
+  </main>
+
+  <footer class="footer"></footer>
+</section>

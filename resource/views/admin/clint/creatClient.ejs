@@ -1,0 +1,104 @@
+<section class="send_data">
+  <header class="head">
+    <ul class="menu-bar">
+      <li><a href="/admin" class="menu">صفحه اصلی</a></li>
+      <li><a href="/admin/clint" class="menu">صفحه مشتری</a></li>
+    </ul>
+  </header>
+
+  <main class="form_auth">
+    <form action="/admin/creatClient" method="post">
+      <h5>مشخصات مشتری را وارد کنید</h5>
+      <%- include(viewPath('layouts/error-messages')) -%>
+      <input type="text" name="name" placeholder=" نام مشتری را وارد کنید " />
+      <input
+        type="text"
+        name="addresses"
+        placeholder=" آدرس مشتری را وارد کنید "
+      />
+      <input
+        type="number"
+        name="phone"
+        placeholder=" تلفن مشتری را وارد کنید "
+        min="0"
+        required
+      />
+      <a
+        id="click2"
+        style="
+          padding: 0.3rem;
+          font-size: 1rem;
+          font-weight: 800;
+          background-color: white;
+          border-radius: 10px;
+        "
+      >
+        بستانکاری را وارد کنید</a
+      >
+      <input
+        style="display: none"
+        type="number"
+        step="any"
+        min="0"
+        name="creditor"
+        id="creditor"
+        placeholder=" بستانکاری مشتری را وارد کنید "
+        oninput="check(this)"
+      />
+      <!-- <a href="http://" target="_blank" rel="noopener noreferrer"></a> -->
+      <a
+        style="
+          padding: 0.3rem;
+          font-size: 1rem;
+          font-weight: 800;
+          background-color: white;
+          border-radius: 10px;
+          margin-top: 0.5rem;
+        "
+        id="click1"
+      >
+        بدهکاری را وارد کنید</a
+      >
+      <input
+        style="display: none"
+        type="number"
+        step="any"
+        min="0"
+        name="debtor"
+        id="debtor"
+        placeholder=" بدهکاری مشتری را وارد کنید "
+        oninput="check(this)"
+      />
+
+      <button type="submit" class="res btn">ثبت</button>
+    </form>
+  </main>
+
+  <footer class="footer"></footer>
+</section>
+
+<script>
+  function check(input) {
+    if (input.value <= 0) {
+      input.setCustomValidity("نمیتواند کمتراز 0 باشد");
+    } else {
+      input.setCustomValidity("");
+    }
+  }
+</script>
+
+<script>
+  document.getElementById("click1").addEventListener("click", (e) => {
+    document.getElementById("creditor").style.display = "none";
+    document.getElementById("debtor").style.display = "block";
+    document.getElementById("click1").style.display = "none";
+    document.getElementById("click2").style.display = "block";
+  });
+
+  document.getElementById("click2").addEventListener("click", (e) => {
+    document.getElementById("creditor").style.display = "block";
+    document.getElementById("debtor").style.display = "none";
+    document.getElementById("click2").style.display = "none";
+    document.getElementById("click1").style.display = "block";
+  });
+</script>
