@@ -74,15 +74,16 @@
           (factors.priceTotal + factors.discount ).toLocaleString() %> <% } else
           {%> <%= (factors.priceTotal).toLocaleString() %> <%} %>
         </div>
+        <% if(factors.name_clint === 'بدون نام') { %> <% } else { %>
         <div class="factor_text">
           پرداختی : &nbsp;&nbsp;&nbsp;<% if(factors.discount) { %>
           <%=(factors.discount).toLocaleString() %> <% } else{ %> 0 <% } %>
         </div>
         <div class="factor_text" style="font-size: 0.8rem !important">
-          مبلغ پرداختی : &nbsp;&nbsp;&nbsp;&nbsp; <%=
+          مبلغ قابل پرداختی : &nbsp;&nbsp;&nbsp;&nbsp; <%=
           (factors.priceTotal).toLocaleString() %>
         </div>
-        <% if(factors.name_clint === 'بدون نام') { %> <% } else { %>
+
         <div class="factor_text">
           بدهی قبل از فاکتور : &nbsp;&nbsp;&nbsp;<%=
           (factors.debtorPrice).toLocaleString() %>

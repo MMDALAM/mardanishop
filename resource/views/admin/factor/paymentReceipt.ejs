@@ -34,7 +34,7 @@
 
         <div class="item">
           <p><%= clints.name %></p>
-          <p><%= date(clints.createdAt).format('jYYYY/jMM/jD') %></p>
+          <p><%= date(debtors.createdAt).format('jYYYY/jMM/jD') %></p>
           <% if(clints.name_clint === 'بدون نام') { %> <% } else { %>
           <p><%= clints.phone %></p>
           <% } %>
@@ -49,8 +49,12 @@
           (debtors.amount_debtor).toLocaleString() %>
         </div>
         <div class="factor_text">
-          مانده حساب : &nbsp;&nbsp;&nbsp;<%=
+          بدهی قبلی: &nbsp;&nbsp;&nbsp;<%=
           (debtors.debtor_clint).toLocaleString() %> %>
+        </div>
+        <div class="factor_text">
+          مانده حساب : &nbsp;&nbsp;&nbsp;<%=
+          (clints.debtor).toLocaleString() %> %>
         </div>
         <% if(debtors.description){ %>
         <div class="factor_text">

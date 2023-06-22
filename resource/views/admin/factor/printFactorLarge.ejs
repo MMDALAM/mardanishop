@@ -61,18 +61,21 @@
     <% number++ %>
     <% }) %>
         </table>
-
-        <div class="factor_txt" style="font-size: 1.1rem !important">قیمت کل فاکتور : <%=(factors.priceTotal).toLocaleString() %></div>
+        <div class="factor_txt" > 
+            جمع کل :<% if(factors.discount) { %> <%=
+                (factors.priceTotal + factors.discount ).toLocaleString() %> <% } else
+                {%> <%= (factors.priceTotal).toLocaleString() %> <%} %>
+        </div>
         <div class="factor_txt"> پرداختی : <% if(factors.discount) { %> <%=(factors.discount).toLocaleString() %> <% } else{ %>  0 <% } %></div>
+        <div class="factor_txt" > مبلغ قابل پرداخت : <%=(factors.priceTotal).toLocaleString() %></div>
         <% if(factors.name_clint === 'بدون نام') { %>
             <% } else { %>
-        <div class="factor_txt">بدهی قبل از فاکتور : <%= (clints.debtor).toLocaleString() %></div>
+        <div class="factor_txt">بدهی قبل از فاکتور : <%= (factors.debtorPrice).toLocaleString() %></div>
         <div class="factor_txt">بدهی قبل با این فاکتور : 
             <% if(factors.unpaid){  %>
-                <%= (clints.debtor).toLocaleString()%>
+                <%= (factors.debtorPrice).toLocaleString()%>
             <% }else{%>
-                
-                <%= (factors.priceTotal + clints.debtor).toLocaleString()%>
+                <%= (factors.priceTotal + factors.debtorPrice).toLocaleString()%>
             <% } %>
         </div>
         <% } %>
